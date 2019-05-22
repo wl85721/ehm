@@ -3,23 +3,24 @@
 <head>
   <title>Ethereum Health Fitness</title>
   <link href='https://fonts.loli.net/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
-  <link rel = "stylesheet"  type = "text/css"  href = "stylesheets/app.css"  />
+
+
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script src="./javascripts/app.js"></script>
+
 </head>
 <body>
-  <h1>Ethereum Health Fitness</h1>
+  <h1>平时成绩管理系统</h1>
   <h1></h1>
 
   <input id = "address">
 
-  <button id = "login_in" > switch address </button>
+  <button id = "login_in" > 切换地址 </button>
 
-  <h3>Current User's Address</h3>
+  <h3>当前课程地址</h3>
 
-  <p id = "currentAddress" > not login yet </p>
+  <p id = "currentAddress" >未登录 </p>
 
-  <h2> All man in your Account: </h2>
+  <h2> 所有学生列表 </h2>
 
 
 
@@ -27,9 +28,10 @@
     <thead>
       <tr >
         <td>id</td>
-        <td>name</td>
-        <td>backMuscle</td>
-        <td>chestMuscle</td>
+        <td>姓名</td>
+        <td>学号</td>
+        <td>迟到</td>
+        <td>缺勤</td>
         <td>armMuscle</td>
         <td>legMuscle</td>
         <td>vitality</td>
@@ -58,22 +60,23 @@
 
 
   <hr/>
-  <h3>Want create a people? do it</h3>
-  <input id = "name" placeholder="name" >
+  <h3>增加学生</h3>
+  <input id = "name" placeholder="姓名" >
+  <input id = "sno" placeholder="学号" >
   <br>
-  
-  <button id ="createMember" > create a people </button>
+
+  <button id ="createMember" > 添加 </button>
   <hr/>
 
-  <h3>Your train plan start Train your people</h3>
-  
+  <h3>增加考勤记录</h3>
+
   <input id = "trainId" placeholder="Train id" >
   <br>
 
-  <label><input name="Fruit" type="radio" checked="checked" id="1" />backMuscle </label> 
-  <label><input name="Fruit" type="radio" id="2" />chestMuscle </label> 
-  <label><input name="Fruit" type="radio" id="3" />armMuscle </label> 
-  <label><input name="Fruit" type="radio" id="4" />legMuscle </label> 
+  <label><input name="Fruit" type="radio" checked="checked" id="1" />backMuscle </label>
+  <label><input name="Fruit" type="radio" id="2" />chestMuscle </label>
+  <label><input name="Fruit" type="radio" id="3" />armMuscle </label>
+  <label><input name="Fruit" type="radio" id="4" />legMuscle </label>
   <br>
   <button id ="train" > Train </button>
   <br>
@@ -87,7 +90,7 @@
   <button id ="IncreaseNutrition" > Increase Nutrition </button>
   <button id ="StudyKnowledg" > Study Fit Knowledg </button>
   <br>
-  
+
 
 </body>
-</html> 
+</html>
