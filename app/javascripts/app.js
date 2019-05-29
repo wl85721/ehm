@@ -295,8 +295,6 @@ window.App = { //where to close
                 '<td>' + result[2].toNumber() + '</td>' +
                 '<td>' + result[3].toNumber() + '</td>' +
                 '<td>' + result[4].toNumber() + '</td>' +
-                '<td>' + result[9].toNumber() + '</td>' +
-                '<td>' + tmp + '</td>' +
                 '</tr>'
 
 
