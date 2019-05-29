@@ -89,14 +89,6 @@ window.App = { //where to close
             }
         });
 
-        $("#setsubject").click(function() {
-            if ($("#subject").val() != "" ){
-                App.setsubject($("#subject").val())
-            } else {
-                alert("课程不能为空！")
-            }
-        });
-
         $("#createMembers").click(function() {
             var stu=$("#stu").val()
             if ($("#stu").val() != "" ) {
@@ -245,22 +237,6 @@ window.App = { //where to close
             alert("添加失败")
         });
     },
-    setsubject : function(name){
-        //alert("creatMember")
-
-
-
-        Fitbody.at(contract_address).then(function(instance){
-            return instance.setsub(name, {from:  window.account_one, gas:1000000} );
-        }).then(function(result){
-            console.log(result);
-            App.getAllMembersInfo()
-            //alert("create success")
-        }).catch(function(err){
-            console.log(err);
-            alert("添加失败")
-        });
-    },
     getMemberInfo : function(num, flag){
         //alert("getMemberInfo")
 
@@ -317,7 +293,7 @@ window.App = { //where to close
         });
     },
     getAllMembersInfo : function(){
-      //显示学生列表
+
         Fitbody.at(contract_address).then(function(instance){
            return instance.getBodyCount.call();
        }).then(function(num){
@@ -325,21 +301,26 @@ window.App = { //where to close
             $(".tablehead>tbody").empty();
             $(".table2>tbody").empty();
             for(var i = 0; i < num.toNumber(); i++) {
+
                 App.getMemberInfo(i, true)
                 App.bodyToOwner(i, true)
+
+                // (function(i){
+
+                //     App.getMemberInfo(i, true).then(function(){
+                //         App.bodyToOwner(i, true)
+                //     })
+                //     //nextRegister( App.getMemberInfo(i, true) ,App.bodyToOwner(i, true))
+
+                // })(i)
+
+                //console.log(tmp)
             }
+        //     console.log(members);
+
        }).catch(function(err){
            console.log(err);
        });
-       //查询课程名称
-       Fitbody.at(contract_address).then(function(instance){
-          return instance.getsub.call();
-      }).then(function(sub){
-       console.log(sub);
-       $("#currentsubject").text(sub);
-      }).catch(function(err){
-          console.log(err);
-      });
     },
 
     TrainBody : function(id, choice){

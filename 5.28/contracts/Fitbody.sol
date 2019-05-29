@@ -31,7 +31,7 @@ contract Fitbody is Ownable {
 
     //当前账户下的健身人数组
     member[] public  members;
-    string public sub="ddddd";
+
 
 
     //创建健身人的私有构造函数
@@ -49,16 +49,10 @@ contract Fitbody is Ownable {
 
         _createMember(1,1,1,1,10, _name, _sno, msg.value);
     }
-    function setsub(string  calldata _sub) payable external {
 
-        sub=_sub;
-    }
 
     function getBodyCount() external view returns(uint256) {
         return members.length;
-    }
-    function getsub() external view returns(string memory) {
-        return sub;
     }
 
     //训练训练不同部位，使不同部位的肌肉量增加

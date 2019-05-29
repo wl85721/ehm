@@ -4,7 +4,6 @@ import {  default as contract } from 'truffle-contract';
 
 import fitbody_artifacts from '../../build/contracts/Fitbody.json'
 
-
 var accounts;
 var Fitbody = contract(fitbody_artifacts);
 
@@ -12,7 +11,7 @@ var addressdir = {}
 var contract_address = ""
 window.account_one = ""
 
-    console.log("Fitbody:"+Fitbody)
+
 
 window.addEventListener('load', function() {
 
@@ -33,8 +32,6 @@ window.addEventListener('load', function() {
     console.log("读取账户和合约地址对应关系")
     var tmp = localStorage.data
     addressdir = JSON.parse(tmp)
-    console.log(tmp)
-    console.log("localStorage.data:"+localStorage.data)
     App.start();
 
 });
@@ -43,7 +40,7 @@ window.onunload=function(){
     console.log("存储账户和合约地址对应关系")
     localStorage.data = JSON.stringify(addressdir)
 
-    console.log("addressdir:"+addressdir)
+    console.log(addressdir)
 
     return "111";
 
@@ -57,12 +54,12 @@ window.App = { //where to close
 
         web3.eth.getAccounts(function(err, accs) {
             if (err != null) {
-                alert("获取不到您的账户地址，请安装METAMASK");
+                alert("There was an error fetching your accounts.");
                 return;
             }
 
             if (accs.length == 0) {
-                alert("获取不到您的账户地址，请打开METAMASK,并检查关闭隐私模式.");
+                alert("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.");
                 return;
             }
             accounts = accs;
@@ -87,29 +84,9 @@ window.App = { //where to close
             } else {
                 alert("姓名和学号都不能为空！")
             }
-        });
 
-        $("#setsubject").click(function() {
-            if ($("#subject").val() != "" ){
-                App.setsubject($("#subject").val())
-            } else {
-                alert("课程不能为空！")
-            }
-        });
 
-        $("#createMembers").click(function() {
-            var stu=$("#stu").val()
-            if ($("#stu").val() != "" ) {
-              stu=stu.split("\n")
 
-              stu.forEach(function(value,i){
-                                            value=value.split(",");
-                                            App.creatMember(value[0],value[1]);
-　　                                        console.log('forEach遍历:'+i+'--'+value[0]+'--'+value[1]);
-                                           })
-            } else {
-                alert("不能为空！")
-            }
         });
 
         $("#train").click(function() {
@@ -186,7 +163,7 @@ window.App = { //where to close
     },
 
     creatContract : function() {
-        console.log("ffffff",addressdir,"fffff", addressdir[ window.account_one],"fffff")
+        console.log(addressdir, addressdir[ window.account_one])
 
         if (addressdir[ window.account_one] != null) {
 
@@ -245,22 +222,6 @@ window.App = { //where to close
             alert("添加失败")
         });
     },
-    setsubject : function(name){
-        //alert("creatMember")
-
-
-
-        Fitbody.at(contract_address).then(function(instance){
-            return instance.setsub(name, {from:  window.account_one, gas:1000000} );
-        }).then(function(result){
-            console.log(result);
-            App.getAllMembersInfo()
-            //alert("create success")
-        }).catch(function(err){
-            console.log(err);
-            alert("添加失败")
-        });
-    },
     getMemberInfo : function(num, flag){
         //alert("getMemberInfo")
 
@@ -300,7 +261,7 @@ window.App = { //where to close
                 '</tr>'
 
 
-                $(".tablehead>tbody:last").append(rowTem);//复制tr，并且添加
+                $(".table>tbody:last").append(rowTem);//复制tr，并且添加
 
 
             }
@@ -317,29 +278,34 @@ window.App = { //where to close
         });
     },
     getAllMembersInfo : function(){
-      //显示学生列表
+
         Fitbody.at(contract_address).then(function(instance){
            return instance.getBodyCount.call();
        }).then(function(num){
             var tmp = []
-            $(".tablehead>tbody").empty();
+            $(".table>tbody").empty();
             $(".table2>tbody").empty();
             for(var i = 0; i < num.toNumber(); i++) {
+
                 App.getMemberInfo(i, true)
                 App.bodyToOwner(i, true)
+
+                // (function(i){
+
+                //     App.getMemberInfo(i, true).then(function(){
+                //         App.bodyToOwner(i, true)
+                //     })
+                //     //nextRegister( App.getMemberInfo(i, true) ,App.bodyToOwner(i, true))
+
+                // })(i)
+
+                //console.log(tmp)
             }
+        //     console.log(members);
+
        }).catch(function(err){
            console.log(err);
        });
-       //查询课程名称
-       Fitbody.at(contract_address).then(function(instance){
-          return instance.getsub.call();
-      }).then(function(sub){
-       console.log(sub);
-       $("#currentsubject").text(sub);
-      }).catch(function(err){
-          console.log(err);
-      });
     },
 
     TrainBody : function(id, choice){
