@@ -101,7 +101,7 @@ window.App = { //where to close
                 alert("课程不能为空！")
             }
         });
-
+//绑定增加学生单击事件
         $("#createMembers").click(function() {
             var stu=$("#stu").val()
             if ($("#stu").val() != "" ) {
@@ -116,6 +116,7 @@ window.App = { //where to close
                 alert("不能为空！")
             }
         });
+//绑定对学生操作事件
 
         $("#train").click(function() {
             //console.log($("#trainId").val())
@@ -129,11 +130,29 @@ window.App = { //where to close
             } else {
                 alert("Trainer's id can't be empty")
             }
-
-
-
-
         });
+
+
+        $("tbody").on('click',"[id='train1']",function(){
+                App.TrainBody($(this).val(),1)
+        });
+        $("tbody").on('click',"[id='train2']",function(){
+                App.TrainBody($(this).val(),2)
+        });
+        $("tbody").on('click',"[id='train3']",function(){
+                App.TrainBody($(this).val(),3)
+        });
+        $("tbody").on('click',"[id='train4']",function(){
+                App.TrainBody($(this).val(),4)
+        });
+
+  $(function(){
+     $("[id = train1]").click(function(){
+      alert("hi");
+     });
+    });
+
+
         $("#RestBody").click(function() {
             if ($("#activityId").val() != "") {
                 console.log($("#activityId").val())
@@ -296,10 +315,17 @@ window.App = { //where to close
                 '<td>' + result[5] + '</td>' +
                 '<td>' + result[6] + '</td>' +
                 '<td>' + result[0].toNumber() + '</td>' +
+              //  '<td>' +  '234'+ '</td>' +
                 '<td>' + result[1].toNumber() + '</td>' +
+              //  '<td>' +  '<button id ="train2" > 缺勤 </button> '+ '</td>' +
                 '<td>' + result[2].toNumber() + '</td>' +
+              //  '<td>' +  '<button id ="train3" > 扣分 </button> '+ '</td>' +
+                '<td>' + new Date(result[9].toNumber()*1000).toLocaleString().replace(/:\d{1,2}$/,' ') + '</td>' +
                 '<td>' + result[3].toNumber() + '</td>' +
+              //  '<td>' +  '<button id ="train4" > 加分 </button> '+ '</td>' +
+                '<td>' + new Date(result[8].toNumber()*1000).toLocaleString() + '</td>' +
                 '<td>' + result[4].toNumber() + '</td>' +
+                '<td>' +  '<button id ="train1" value="'+ num+'" > 迟到</button>&nbsp<button id ="train2"  value="'+ num+'" > 缺勤 </button>&nbsp<button id ="train3"  value="'+ num+'" > 扣分 </button>&nbsp<button id ="train4" value="'+ num+'" >加分</button> '+ '</td>' +
                 '</tr>'
 
 
