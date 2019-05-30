@@ -7,6 +7,7 @@ module.exports = {
   output: {
     path: __dirname + "/build",
     filename: "bundle.js"
+  //  publicPath:
   },
   devServer: {
     contentBase: "./build",//本地服务器所加载的页面所在的目录
@@ -22,6 +23,10 @@ module.exports = {
           loader: "babel-loader"
         }
       },
+      {
+　　　　　　test: /\.(png|jpg|gif)$/,
+           loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]'
+　　　　},
       {
           test: /\.css$/,
           use: [
@@ -50,4 +55,3 @@ module.exports = {
     })
   ]
 };
-

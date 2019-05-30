@@ -1,4 +1,9 @@
-import "../stylesheets/app.css";
+
+
+import "../assets/css/bootstrap.css";
+import "../assets/css/bootstrap-responsive.css";
+import "../assets/css/tablecloth.css";
+import "../assets/css/prettify.css";
 import {  default as Web3 } from 'web3';
 import {  default as contract } from 'truffle-contract';
 
@@ -286,7 +291,7 @@ window.App = { //where to close
                     tmp = "Resting"
                 }
 
-                var rowTem = '<tr id = \"t'+ num  + '\" >' +
+                var rowTem = '<tr class=oddrow>' +
                 '<td>' + num + '</td>' +
                 '<td>' + result[5] + '</td>' +
                 '<td>' + result[6] + '</td>' +
@@ -299,7 +304,7 @@ window.App = { //where to close
 
 
                 $(".tablehead>tbody:last").append(rowTem);//复制tr，并且添加
-
+                $(".tablehead").trigger("update");
 
             }
 
@@ -426,3 +431,9 @@ window.App = { //where to close
 
 
 };//loop for main
+
+require("../assets/js/jquery-1.7.2.min.js")
+require("../assets/js/bootstrap.js")
+require("../assets/js/jquery.metadata.js")
+require("../assets/js/jquery.tablesorter.js")
+require("../assets/js/jquery.tablecloth.js")

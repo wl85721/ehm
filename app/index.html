@@ -7,6 +7,9 @@
 
 </head>
 <body>
+  <div class="container">
+       <div class="row">
+         <div class="span12" style="padding:20px 0;">
   <h1>平时成绩管理系统</h1>
   <h1></h1>
 
@@ -22,24 +25,23 @@
   <h2> 所有学生列表 </h2>
 
 
+          <table cellspacing="1" cellpadding="3" class="tablehead" style="background:#CCC;">
+             <thead>
+               <tr  class="colhead">
+                 <th  >id</th>
+                 <th  class="{sorter: false}">姓名</th>
+                 <th>学号</th>
+                 <th>迟到一次扣5分</th>
+                 <th>缺勤一次扣10分</th>
+                 <th>扣分项(5天内只能扣一次)</th>
+                 <th>加分项(5天内只能加一次)</th>
+                 <th>总分</th>
+               </tr>
+             </thead>
+             <tbody>
 
-  <table cellspacing="1" cellpadding="3" class="tablehead" style="background:#CCC;">
-    <thead>
-      <tr  class="colhead">
-        <td >id</td>
-        <td >姓名</td>
-        <td>学号</td>
-        <td>迟到一次扣5分</td>
-        <td>缺勤一次扣10分</td>
-        <td>扣分项(5天内只能扣一次)</td>
-        <td>加分项(5天内只能加一次)</td>
-        <td>总分</td>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
-
+             </tbody>
+           </table>
   <br>
   <br>
   <br>
@@ -48,7 +50,7 @@
       <thead>
         <tr >
           <td>address</td>
-          <td>id</td>
+          <td>id</th>
         </tr>
       </thead>
       <tbody>
@@ -97,6 +99,21 @@
   <button id ="StudyKnowledg" > Study Fit Knowledg </button>
   <br>
 
+  </div>
+  </div>
+  </div>
 
 </body>
+
+
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+        $("table").tablecloth({
+          theme: "paper",
+          striped: true,
+          sortable: true,
+          condensed: true
+        });
+      });
+    </script>
 </html>

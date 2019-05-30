@@ -15,7 +15,8 @@ contract Fitbody is Ownable {
       string name;//姓名
       string sno;//学号
       uint256 amount;
-      uint256 LaststartRestTime;
+      uint256 lastjiafentime;
+      uint256 lastkoufentime;
       uint increaseRatio;
       uint state;
 
@@ -37,7 +38,7 @@ contract Fitbody is Ownable {
      function _createMember(uint _chidao, uint _queqin,uint _koufen, uint _jiafen, uint _zongfen, string memory _name, string memory _sno, uint256 _amount) private {
          //require(msg.value >= 0.001 ether);
 
-         uint256 id = members.push(member( _chidao,  _queqin,_koufen, _jiafen,  _zongfen, _name, _sno , _amount, now, 1, 0)) - 1;
+         uint256 id = members.push(member( _chidao,  _queqin,_koufen, _jiafen,  _zongfen, _name, _sno , _amount, now, now,1, 0)) - 1;
          bodyToOwner[id] = msg.sender;
          ownerBodyCount[msg.sender] = ownerBodyCount[msg.sender] + 1;
 
@@ -86,13 +87,17 @@ contract Fitbody is Ownable {
 
       } else  if (choice == 3) {
           require(myMember.zongfen >= 5);
+          require((now - myMember.lastkoufentime)/1728 >= 1);
           myMember.koufen +=1;
           myMember.zongfen -= 5;
+          myMember.lastkoufentime = now;
 
       } else  if (choice == 4) {
           require(myMember.zongfen >= 0);
+          require((now - myMember.lastjiafentime)/1728 >= 1);
           myMember.jiafen +=1;
           myMember.zongfen += 5;
+          myMember.lastjiafentime = now;
 
       } else {
 
